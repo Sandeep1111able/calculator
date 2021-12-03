@@ -89,14 +89,14 @@ numbers.forEach((number) => {
 
         if (symbol === '') {
 
-            if (!(screen.textContent.includes(".") && e.target.textContent === ".")) {
+            if (!(firstValue.includes(".") && e.target.textContent === ".")) {
                 screen.textContent = '';
                 firstValue += number.textContent;
                 screen.textContent = firstValue;
             }
         } else {
 
-            if (!(screen.textContent.includes(".") && e.target.textContent === ".")) {
+            if (!(secondValue.includes(".") && e.target.textContent === ".")) {
                 screen.textContent = '';
                 secondValue += number.textContent;
                 screen.textContent = secondValue;
