@@ -1,6 +1,8 @@
 const numbers = document.querySelectorAll(".numbers");
 const screen = document.querySelector(".screen");
 const operators = document.querySelectorAll(".operators");
+const clear = document.querySelector(".clear");
+const backspace = document.querySelector(".backspace");
 let firstNumber = "";
 let secondNumber = "";
 let choosenOperator = "";
@@ -59,4 +61,19 @@ operators.forEach((operator) => {
       screen.textContent = finalValue;
     }
   });
+});
+
+clear.addEventListener("click", () => {
+  firstNumber = "";
+  secondNumber = "";
+  choosenOperator = "";
+  finalValue = "";
+  screen.textContent = "";
+});
+
+backspace.addEventListener("click", () => {
+  screen.textContent = screen.textContent.slice(
+    0,
+    screen.textContent.length - 1
+  );
 });
