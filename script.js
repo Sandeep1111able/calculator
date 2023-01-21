@@ -38,6 +38,14 @@ const operate = function (operator, firstNumber, secondNumber) {
 };
 
 const populateDisplay = function (e) {
+  if (screen.textContent.length >= 11) {
+    return;
+  }
+  if (this.textContent === ".") {
+    if (screen.textContent.indexOf(".") !== -1) {
+      return;
+    }
+  }
   if (choosenOperator === "") {
     screen.textContent += this.textContent;
     firstNumber = Number(screen.textContent);
@@ -47,18 +55,41 @@ const populateDisplay = function (e) {
   }
 };
 
+const toggleBtn = function (buttons, booleanValue) {
+  buttons.forEach((button) => {
+    button.disabled = booleanValue;
+  });
+};
+
 numbers.forEach((number) => {
   number.addEventListener("click", populateDisplay);
 });
 
+const calculate = function () {
+  finalValue = operate(choosenOperator, firstNumber, secondNumber);
+  if (finalValue.toString().length > 11) {
+    finalValue = finalValue.toPrecision(8);
+  }
+  screen.textContent = finalValue;
+  firstNumber = finalValue;
+  secondNumber = "";
+  toggleBtn(numbers, true);
+};
+
 operators.forEach((operator) => {
   operator.addEventListener("click", (e) => {
+    toggleBtn(numbers, false);
+    toggleBtn(operators, false);
     if (operator.textContent !== "=") {
+      if (firstNumber !== "" && secondNumber !== "") {
+        calculate();
+        return;
+      }
       screen.textContent = "";
       choosenOperator = operator.textContent;
     } else {
-      finalValue = operate(choosenOperator, firstNumber, secondNumber);
-      screen.textContent = finalValue;
+      calculate();
+      operator.disabled = true;
     }
   });
 });
@@ -69,6 +100,8 @@ clear.addEventListener("click", () => {
   choosenOperator = "";
   finalValue = "";
   screen.textContent = "";
+  toggleBtn(numbers, false);
+  toggleBtn(operators, false);
 });
 
 backspace.addEventListener("click", () => {

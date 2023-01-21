@@ -85,3 +85,13 @@ h1 {
 .equals {
   margin-left: 36px;
 }
+
+.operators:disabled {
+  background-color: #ff9500;
+  color: #000;
+}
+
+.numbers:disabled {
+  background-color: #d4d4d4;
+  color: #000;
+}
